@@ -29,7 +29,7 @@ public class CrowdSimulatorService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(fixedRate = 3000)
     public void generateCrowdData() {
 
         String stage = stages.get(

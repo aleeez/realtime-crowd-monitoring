@@ -5,4 +5,4 @@ spring:
   application:
     name: crowd-generator
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: kafka:9092

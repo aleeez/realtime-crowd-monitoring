@@ -21,7 +21,7 @@ public class KafkaProducerConfig {
 
         config.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "localhost:9092"
+                "kafka:9092"
         );
 
         config.put(
