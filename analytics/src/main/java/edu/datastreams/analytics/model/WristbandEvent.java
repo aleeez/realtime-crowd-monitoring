@@ -1,4 +1,4 @@
-package edu.datastreams.wristband_generator.model;
+package edu.datastreams.analytics.model;
 
 import java.time.LocalDateTime;
 
@@ -8,4 +8,5 @@ public record WristbandEvent(
         String zone,
         String action,
         LocalDateTime timestamp
-) {}
+) {
+}

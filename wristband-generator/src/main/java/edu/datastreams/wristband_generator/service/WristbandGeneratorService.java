@@ -39,11 +39,12 @@ public class WristbandGeneratorService {
                 "WB-" + random.nextInt(1000),
                 "ATT-" + UUID.randomUUID().toString().substring(0, 8),
                 zones.get(random.nextInt(zones.size())),
+                random.nextBoolean() ? "ENTRY" : "EXIT",
                 LocalDateTime.now()
         );
 
         kafkaTemplate.send(
-                "wristband-generator",
+                "wristband-events",
                 event.wristbandId(),
                 event
         );

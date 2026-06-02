@@ -72,3 +72,15 @@ services:
 
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+  security-gen:
+    build:
+      context: ./security-generator
+
+    container_name: security
+
+    depends_on:
+      - kafka
+
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092

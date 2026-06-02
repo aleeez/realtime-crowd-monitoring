@@ -11,7 +11,7 @@ public class TopicConfig {
     @Bean
     public NewTopic wristbandGeneratorTopic() {
         return TopicBuilder
-                .name("wristband-generator")
+                .name("wristband-events")
                 .partitions(1)
                 .replicas(1)
                 .build();
