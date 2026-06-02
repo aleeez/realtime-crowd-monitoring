@@ -37,11 +37,11 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
 
-  crowd-generator:
+  crowd-gen:
     build:
       context: ./crowd-generator
 
-    container_name: crowd-generator
+    container_name: crowd
 
     depends_on:
       - kafka
@@ -54,6 +54,18 @@ services:
       context: ./analytics
 
     container_name: analytics
+
+    depends_on:
+      - kafka
+
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    
+  wristband-gen:
+    build:
+      context: ./wristband-generator
+
+    container_name: wristband
 
     depends_on:
       - kafka
