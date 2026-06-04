@@ -1,0 +1,67 @@
+.checkins-container {
+
+    margin-top: 40px;
+
+    padding: 20px;
+
+    border-radius: 12px;
+}
+
+.checkin-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 12px;
+}
+
+.timeframe {
+
+    width: 70px;
+
+    font-weight: bold;
+}
+
+.bar-wrapper {
+
+    flex: 1;
+
+    height: 28px;
+
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.bar {
+
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #00d4ff,
+        #00ff88
+    );
+
+    transition: width 0.5s ease;
+}
+
+.count {
+
+    width: 80px;
+
+    text-align: right;
+
+    font-weight: bold;
+}
+
+.medal {
+
+    margin-left: 8px;
+
+    font-size: 1.3rem;
+}

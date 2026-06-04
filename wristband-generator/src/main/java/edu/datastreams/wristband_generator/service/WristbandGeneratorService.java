@@ -17,13 +17,11 @@ public class WristbandGeneratorService {
 
     private final Random random = new Random();
 
-    private final List<String> zones = List.of(
-            "Main Stage",
-            "Techno Arena",
-            "House Tent",
-            "Food Court",
-            "VIP Area",
-            "Camping"
+    private final List<String> ticketTypes = List.of(
+            "GENERAL_PASS",
+            "GENERAL_DAY_TICKET",
+            "VIP_PASS",
+            "VIP_DAY_TICKET"
     );
 
     public WristbandGeneratorService(
@@ -32,23 +30,50 @@ public class WristbandGeneratorService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @Scheduled(fixedRate = 1000)
-    public void generateWristbandScan() {
+    @Scheduled(fixedRate = 5000)
+    public void generateWristbandScans() {
 
-        WristbandEvent event = new WristbandEvent(
-                "WB-" + random.nextInt(1000),
-                "ATT-" + UUID.randomUUID().toString().substring(0, 8),
-                zones.get(random.nextInt(zones.size())),
-                random.nextBoolean() ? "ENTRY" : "EXIT",
-                LocalDateTime.now()
+        int burstSize =
+                random.nextInt(10) + 1;
+
+        System.out.println(
+                "[WRISTBAND GENERATOR] Generating "
+                        + burstSize
+                        + " events..."
         );
 
-        kafkaTemplate.send(
-                "wristband-events",
-                event.wristbandId(),
-                event
-        );
+        for (int i = 0; i < burstSize; i++) {
 
-        System.out.println("Sent wristband event -> " + event);
+            WristbandEvent event =
+                    new WristbandEvent(
+                            "WB-" + random.nextInt(10000),
+                            "ATT-" + UUID.randomUUID()
+                                    .toString()
+                                    .substring(0, 8),
+
+                            ticketTypes.get(
+                                    random.nextInt(
+                                            ticketTypes.size()
+                                    )
+                            ),
+
+                            random.nextBoolean()
+                                    ? "ENTRY"
+                                    : "EXIT",
+
+                            LocalDateTime.now()
+                    );
+
+            kafkaTemplate.send(
+                    "wristband-events",
+                    event.wristbandId(),
+                    event
+            );
+
+            System.out.println(
+                    "Sent wristband event -> "
+                            + event
+            );
+        }
     }
 }
